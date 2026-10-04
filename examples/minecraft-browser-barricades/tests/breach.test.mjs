@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import {BarricadeBreach} from '../src/barricade-breach.mjs';
+import {slots} from '../src/bridge-geometry.mjs';
+const b=new BarricadeBreach(),ids=Array(8).fill('minecraft:air');ids[0]='minecraft:oak_planks';
+const enemy={alive:true,state:'COMBAT',pos:{x:9.5,y:0,z:14.5}};
+const state={ids,slots,enemies:[enemy],connected:true,playing:true,busy:false,now:0};
+assert.equal(b.tick(state),null);b.enabled=true;
+for(const override of [{connected:false},{playing:false},{busy:true},{reachable:()=>false},{enemies:[{...enemy,alive:false}]},{enemies:[{...enemy,state:'PATROL'}]}])assert.equal(b.tick({...state,...override}),null);
+assert.equal(b.tick(state).hits,1);assert.equal(b.tick({...state,now:1000}),null);
+assert.equal(b.tick({...state,now:1500}).hits,2);
+assert.equal(b.tick({...state,now:3000}).breakRequested,true);
+assert.equal(ids[0],'minecraft:oak_planks','controller does not optimistically remove source');
+ids[0]='minecraft:air';assert.equal(b.tick({...state,now:5000}),null);
+ids[0]='minecraft:oak_planks';assert.equal(b.tick({...state,now:6500}).hits,1);
+console.log('PASS: enabled combat-only three-hit request; pause/disconnect/busy/occlusion guards; source owns removal');

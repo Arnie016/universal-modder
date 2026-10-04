@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import {BlockGeometry} from '../src/bridge-geometry.mjs';
+const b=new BlockGeometry(),air=Array(8).fill('minecraft:air');b.replace(air);
+assert.equal(b.ray({x:8,y:.5,z:14.5},{x:1,y:0,z:0},8),8);
+const ids=[...air];ids[0]='minecraft:oak_planks';b.replace(ids);
+assert.equal(b.ray({x:8,y:.5,z:14.5},{x:1,y:0,z:0},8),2);
+assert.equal(b.ray({x:8,y:1.5,z:14.5},{x:1,y:0,z:0},8),8,'waist high block does not block eye ray');
+let p={x:9.8,y:0,z:14.5};b.collide(p,.3);assert.equal(p.x,9.7);
+p={x:9.8,y:2,z:14.5};b.collide(p,.3);assert.equal(p.x,9.8,'above block no collision');
+ids[4]='minecraft:oak_planks';b.replace(ids);assert.equal(b.ray({x:8,y:1.5,z:14.5},{x:1,y:0,z:0},8),2);
+assert.equal(b.blocksCell(5,7),true);assert.equal(b.blocksCell(4,7),false);
+assert.equal(b.replace(ids),false,'idempotent snapshot');
+assert.throws(()=>b.replace(['unavailable']));b.replace(air);assert.equal(b.cells.length,0);
+console.log('PASS: source replacement, exact ray height, one-metre collision, coarse navigation occupancy, removal and invalid snapshot');

@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import * as THREE from 'three';
+import {installWorkLight} from '../src/work-light.mjs';
+const scene=new THREE.Scene(),w=installWorkLight(scene),ids=Array(8).fill('minecraft:air');
+const update=connected=>w.update({ids,connected});
+update(true);assert.equal(w.light.intensity,0);
+ids[1]='minecraft:oak_planks';update(true);assert.equal(w.light.intensity,0);
+ids[5]='minecraft:oak_planks';assert.equal(update(true),'Work light on · visible to infected');assert.equal(w.light.intensity,45);assert.equal(w.lens.material.emissiveIntensity,3);
+update(false);assert.equal(w.light.intensity,0);assert.equal(w.lens.material.emissiveIntensity,0);
+update(true);assert.equal(w.light.intensity,45);
+ids[1]='minecraft:air';update(true);assert.equal(w.light.intensity,0);
+assert.equal(scene.children.includes(w.lamp),true);
+console.log('PASS: production Three.js lamp follows pair, removal, disconnect and resync');

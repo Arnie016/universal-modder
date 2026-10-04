@@ -172,3 +172,7 @@ Full reasoning: [`skills/mod-any-game/references/safety.md`](skills/mod-any-game
   explained them in public.
 
 MIT licensed. Fonts: Space Grotesk and JetBrains Mono (SIL OFL).
+
+## Arnie016 fork experiment
+
+[Real-Minecraft browser barricade components](examples/minecraft-browser-barricades/README.md): original host modules and tests from a local Java Minecraft bridge. Includes an explicit distinction from the standalone Overgrowth browser demo; a complete Overgrowth native-client port remains pending.

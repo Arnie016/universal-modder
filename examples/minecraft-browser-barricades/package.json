@@ -1,0 +1,13 @@
+{
+  "name": "ashfall-browser-bridge-kit",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "test": "node tests/geometry.test.mjs && node tests/explosion.test.mjs && node tests/decoy.test.mjs && node tests/breach.test.mjs && node tests/work-light.test.mjs"
+  },
+  "peerDependencies": {
+    "three": "0.160.0"
+  }
+}

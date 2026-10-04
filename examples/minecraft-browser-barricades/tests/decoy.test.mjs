@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {Decoy} from '../src/decoy.mjs';
+const d=new Decoy(),ids=Array(8).fill('minecraft:air');ids[0]=ids[4]='minecraft:oak_planks';
+const state={ids,connected:true,playing:true,now:0};
+assert.equal(d.tick(state),false);d.enabled=true;
+assert.equal(d.tick(state),true);assert.equal(d.tick({...state,now:2000}),false);
+assert.equal(d.tick({...state,now:2500}),true);
+assert.equal(d.tick({...state,connected:false,now:5000}),false);
+assert.equal(d.tick({...state,playing:false,now:5000}),false);
+ids[4]='minecraft:air';assert.equal(d.tick({...state,now:5000}),false);
+assert.equal(d.pulses,2);
+console.log('PASS: confirmed pair, pulse cadence, removal, disconnect and pause');
