@@ -455,6 +455,46 @@
   ]
  },
  {
+  "path": "games/overgrowth/minecraft-tnt-and-in-game-agent-test-squad.md",
+  "kind": "game",
+  "title": "Minecraft block mode and an in-game agent test squad in a three.js survival game",
+  "game": "Overgrowth (browser survival slice)",
+  "games_also": [
+   "Minecraft Java Edition"
+  ],
+  "game_version": "Overgrowth single-file build, three.js r128 from CDN, Chromium 1194 (Playwright) for tests",
+  "platform": "other",
+  "engine": "unknown",
+  "route": "other",
+  "tools": [
+   "three.js r128",
+   "Playwright + headless Chromium (SwiftShader)",
+   "Python patch scripts"
+  ],
+  "anti_cheat": "none (single-player browser game we own the source of)",
+  "status": "working",
+  "agents": [
+   "Claude Code (Opus 5.5)"
+  ],
+  "humans": [
+   "Arnie016"
+  ],
+  "date": "2026-10-04",
+  "links": [
+   "https://github.com/Arnie016/overgrowth"
+  ],
+  "tags": [
+   "mashup",
+   "minecraft-in-x",
+   "voxels",
+   "tnt",
+   "agent-harness",
+   "in-game-tests",
+   "browser",
+   "threejs"
+  ]
+ },
+ {
   "path": "games/stick-it-to-the-stickman/instant-fail-choice-prompts-patching-a-unity-level-s-death-p.md",
   "kind": "game",
   "title": "Instant-fail choice prompts: patching a Unity level's death path with Harmony",
